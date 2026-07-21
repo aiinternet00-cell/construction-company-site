@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="СтройПрофи — строительство, ремонт и проектирование с гарантией качества.">
+  <title>СтройПрофи — строим на поколения</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Шапка закреплена сверху, чтобы основные разделы всегда были под рукой. -->
+  <header class="header" id="home">
+    <div class="container header__inner">
+      <a class="logo" href="#home" aria-label="СтройПрофи — на главную">
+        <span class="logo__mark" aria-hidden="true">СП</span>
+        <span>Строй<span>Профи</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="#home">Главная</a>
+        <a href="#services">Услуги</a>
+        <a href="#projects">Проекты</a>
+        <a href="#about">О компании</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <a class="header__phone" href="tel:+74951234567"><small>Связаться с нами</small>+7 (495) 123-45-67</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Первый экран: фоновое фото затемнено для хорошей читаемости текста. -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__content">
+        <p class="eyebrow">Строительная компания полного цикла</p>
+        <h1 id="hero-title">Строим дома, которые<br>служат <em>поколениями</em></h1>
+        <p class="hero__text">От идеи до ключей — берём на себя проектирование, строительство и отделку вашего будущего дома.</p>
+        <div class="hero__actions">
+          <a class="button js-calc-button" href="#contacts">Рассчитать стоимость <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="#projects">Смотреть проекты <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero__stats" aria-label="Статистика компании">
+          <div><strong>12+</strong><span>лет на рынке</span></div>
+          <div><strong>247</strong><span>сданных объектов</span></div>
+          <div><strong>5 лет</strong><span>гарантии на работы</span></div>
+        </div>
+      </div>
+      <div class="hero__badge"><span>01</span> / Надёжность<br>в каждой детали</div>
+    </section>
+
+    <!-- Карточки услуг содержат короткое описание и порядковый номер. -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow eyebrow--dark">Что мы делаем</p><h2>Наши услуги</h2></div>
+          <p>Реализуем проекты любой сложности — от первого эскиза до финальной отделки.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card"><span class="service-card__number">01</span><div class="service-card__icon">⌂</div><h3>Строительство домов</h3><p>Возводим надёжные загородные дома для комфортной жизни круглый год.</p><a href="#contacts" aria-label="Узнать о строительстве домов">Подробнее →</a></article>
+          <article class="service-card"><span class="service-card__number">02</span><div class="service-card__icon">▱</div><h3>Ремонт квартир</h3><p>Создаём продуманные интерьеры — от демонтажа до установки мебели.</p><a href="#contacts" aria-label="Узнать о ремонте квартир">Подробнее →</a></article>
+          <article class="service-card"><span class="service-card__number">03</span><div class="service-card__icon">✦</div><h3>Отделочные работы</h3><p>Выполняем чистовую и декоративную отделку с вниманием к деталям.</p><a href="#contacts" aria-label="Узнать об отделочных работах">Подробнее →</a></article>
+          <article class="service-card"><span class="service-card__number">04</span><div class="service-card__icon">⌑</div><h3>Проектирование</h3><p>Разрабатываем архитектурные решения с учётом участка и образа жизни.</p><a href="#contacts" aria-label="Узнать о проектировании">Подробнее →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Проекты представлены фотографиями; подписи помогают быстро понять масштаб работ. -->
+    <section class="section section--gray" id="projects">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow eyebrow--dark">Портфолио</p><h2>Наши проекты</h2></div><p>Каждый объект — отражение характера владельца и нашей инженерной экспертизы.</p></div>
+        <div class="projects-grid">
+          <article class="project-card project-card--large"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85" alt="Современный загородный дом Сосновый бор"><div class="project-card__info"><div><span>Строительство · 2025</span><h3>Дом «Сосновый бор»</h3></div><b>320 м²</b></div></article>
+          <article class="project-card"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=85" alt="Светлый интерьер квартиры Панорама"><div class="project-card__info"><div><span>Ремонт · 2024</span><h3>Квартира «Панорама»</h3></div><b>118 м²</b></div></article>
+          <article class="project-card"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85" alt="Лаконичный фасад дома Гармония"><div class="project-card__info"><div><span>Строительство · 2024</span><h3>Дом «Гармония»</h3></div><b>240 м²</b></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Блок о компании объединяет ключевое обещание бренда и преимущества. -->
+    <section class="section about" id="about">
+      <div class="container about__layout">
+        <div class="about__visual"><img src="https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=1200&q=85" alt="Специалист СтройПрофи проверяет ход строительства"><div class="experience"><strong>12</strong><span>лет<br>создаём<br>будущее</span></div></div>
+        <div class="about__content"><p class="eyebrow eyebrow--dark">Почему выбирают нас</p><h2>Строительство<br>без лишних волнений</h2><p class="about__intro">Мы выстроили процессы так, чтобы путь к новому дому был понятным и предсказуемым.</p>
+          <div class="benefits">
+            <div><span>✓</span><h3>Гарантия качества</h3><p>Фиксируем гарантию до 5 лет в договоре.</p></div>
+            <div><span>◷</span><h3>Соблюдение сроков</h3><p>Планируем этапы и отчитываемся каждую неделю.</p></div>
+            <div><span>₽</span><h3>Прозрачная смета</h3><p>Стоимость известна до старта и не меняется.</p></div>
+            <div><span>★</span><h3>Опытные специалисты</h3><p>В штате мастера с опытом работы от 7 лет.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Цитаты клиентов добавляют социальное доказательство. -->
+    <section class="section reviews">
+      <div class="container"><p class="eyebrow">Говорят клиенты</p><h2>Нам доверяют главное</h2>
+        <div class="reviews-grid">
+          <blockquote><div class="stars">★★★★★</div><p>«СтройПрофи построили наш дом точно в срок. Всегда были на связи, подробно объясняли каждый этап. Результат превзошёл ожидания!»</p><footer><strong>Алексей и Мария</strong><span>Дом «Сосновый бор»</span></footer></blockquote>
+          <blockquote><div class="stars">★★★★★</div><p>«Смета действительно не изменилась ни на рубль. Команда аккуратная, профессиональная, а ремонт получился именно таким, как мы представляли.»</p><footer><strong>Елена Соколова</strong><span>Квартира «Панорама»</span></footer></blockquote>
+          <blockquote><div class="stars">★★★★★</div><p>«Особенно ценю внимание к деталям и честные рекомендации. Видно, что специалисты отвечают за качество своей работы.»</p><footer><strong>Дмитрий Волков</strong><span>Дом «Гармония»</span></footer></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Форма использует встроенную проверку браузера и обрабатывается в script.js. -->
+    <section class="section contacts" id="contacts">
+      <div class="container contacts__layout">
+        <div><p class="eyebrow">Обсудим ваш проект</p><h2>Рассчитаем стоимость<br>за 1 рабочий день</h2><p>Оставьте заявку — наш инженер уточнит детали, ответит на вопросы и подготовит предварительный расчёт.</p><div class="contact-list"><a href="tel:+74951234567"><small>Телефон</small>+7 (495) 123-45-67</a><a href="mailto:info@stroyprofi.ru"><small>Почта</small>info@stroyprofi.ru</a></div></div>
+        <form class="contact-form" id="contact-form">
+          <h3>Расскажите о задаче</h3>
+          <label>Ваше имя<input type="text" name="name" placeholder="Например, Александр" required autocomplete="name"></label>
+          <label>Номер телефона<input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel"></label>
+          <label>Описание проекта<textarea name="project" rows="3" placeholder="Дом, площадь, желаемые сроки..."></textarea></label>
+          <button class="button" type="submit">Получить расчёт <span>↗</span></button>
+          <p class="form-note">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных.</p>
+          <p class="form-success" role="status" aria-live="polite">Спасибо! Мы свяжемся с вами в ближайшее время</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container"><a class="logo" href="#home"><span class="logo__mark">СП</span><span>Строй<span>Профи</span></span></a><p>© 2026 СтройПрофи. Строим честно и надолго.</p><a href="#home">Наверх ↑</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
