@@ -2,11 +2,18 @@ const money = (value) => new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
 const header = document.querySelector('.header');
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
-if(nav){const mobileBrand=document.createElement('img');mobileBrand.className='mobile-brand';mobileBrand.src='assets/auronesta-monogram.svg';mobileBrand.alt='Монограмма AURONESTA';const mobileSlogan=document.createElement('p');mobileSlogan.className='mobile-slogan';mobileSlogan.textContent='Архитектура достойной жизни';nav.prepend(mobileBrand);nav.append(mobileSlogan)}
+if(nav){
+  const mobileBrand=document.createElement('img'); mobileBrand.className='mobile-menu__brand'; mobileBrand.src='assets/auronesta-logo-light.svg'; mobileBrand.alt='AURONESTA DEVELOPMENT';
+  const mobileCta=document.createElement('a'); mobileCta.className='button mobile-menu__cta'; mobileCta.href='index.html#feedback'; mobileCta.textContent='Оставить заявку';
+  const mobilePhone=document.createElement('a'); mobilePhone.className='mobile-menu__phone'; mobilePhone.href='tel:+74951234567'; mobilePhone.textContent='+7 (495) 123-45-67';
+  const mobileSlogan=document.createElement('p'); mobileSlogan.className='mobile-slogan'; mobileSlogan.textContent='Архитектура достойной жизни';
+  nav.prepend(mobileBrand); nav.append(mobileCta,mobilePhone,mobileSlogan);
+}
 const setHeader = () => header?.classList.toggle('is-scrolled', scrollY > 20 || document.body.classList.contains('project-page'));
 addEventListener('scroll', setHeader, {passive:true}); setHeader();
-menu?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.classList.toggle('active',open);menu.setAttribute('aria-expanded',open);document.body.classList.toggle('menu-open',open)});
-nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu?.classList.remove('active');document.body.classList.remove('menu-open')}));
+let menuScrollY=0;
+menu?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.classList.toggle('active',open);menu.setAttribute('aria-expanded',open);menu.setAttribute('aria-label',open?'Закрыть меню':'Открыть меню');if(open){menuScrollY=scrollY;document.body.style.top=`-${menuScrollY}px`}document.body.classList.toggle('menu-open',open);if(!open){document.body.style.top='';scrollTo(0,menuScrollY)}});
+nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu?.classList.remove('active');document.body.classList.remove('menu-open');document.body.style.top='';scrollTo(0,menuScrollY)}));
 
 const grid = document.querySelector('#projects-grid');
 if(grid){
@@ -29,4 +36,15 @@ const completedDetail=document.querySelector('#completed-detail');
 if(completedDetail&&typeof COMPLETED_PROJECTS!=='undefined'){
   const p=COMPLETED_PROJECTS.find(x=>x.id===new URLSearchParams(location.search).get('id'));
   if(!p){completedDetail.innerHTML='<section class="completed-detail container"><h1>Проект не найден</h1><a class="button" href="index.html#completed-projects">Вернуться к проектам</a></section>'}else{document.title=`ЖК «${p.name}» — реализованный проект AURONESTA DEVELOPMENT`;completedDetail.innerHTML=`<section class="completed-detail"><div class="container completed-detail__hero"><img src="${p.image}" alt="ЖК «${p.name}» в Краснодаре"><div><p class="eyebrow">Реализованный проект · Сдан</p><h1>ЖК «${p.name}»</h1><p class="lead">${p.description}</p><div class="completed-detail__facts"><div><small>Год сдачи</small><b>${p.year}</b></div><div><small>Количество квартир</small><b>${new Intl.NumberFormat('ru-RU').format(p.apartments)}</b></div><div><small>Район</small><b>${p.district}</b></div><div><small>Город</small><b>Краснодар</b></div></div><p class="completed-detail__note">Дом сдан и заселён. Квартиры в этом комплексе не представлены в каталоге актуальных предложений.</p><a class="text-link" href="index.html#completed-projects">← Все реализованные проекты</a></div></div></section>`}
+}
+// Keep the SVG identity visible in the footer on standalone portfolio pages.
+if(!document.querySelector('footer')){
+  const brandedFooter=document.createElement('footer');
+  brandedFooter.className='brand-footer';
+  brandedFooter.innerHTML='<div class="container brand-footer__inner"><img src="assets/auronesta-logo-light.svg" alt="AURONESTA DEVELOPMENT"><p>Архитектура достойной жизни</p></div>';
+  document.body.append(brandedFooter);
+}
+const existingFooter=document.querySelector('footer:not(.brand-footer)');
+if(existingFooter&&!existingFooter.querySelector('img[src*="auronesta-logo"]')){
+  const footerIdentity=document.createElement('a'); footerIdentity.className='footer-identity'; footerIdentity.href='index.html'; footerIdentity.setAttribute('aria-label','AURONESTA DEVELOPMENT — на главную'); footerIdentity.innerHTML='<img src="assets/auronesta-logo-light.svg" alt="AURONESTA DEVELOPMENT">'; existingFooter.prepend(footerIdentity);
 }
