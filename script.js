@@ -1,144 +1,22 @@
-// Находим интерактивные элементы один раз после загрузки HTML.
-const menuButton = document.querySelector('.menu-toggle');
-const navigation = document.querySelector('.nav');
-const navigationLinks = document.querySelectorAll('.nav a');
-const contactForm = document.querySelector('#contact-form');
-const successMessage = document.querySelector('.form-success');
+const money = (value) => new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
 const header = document.querySelector('.header');
+const menu = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav');
+const setHeader = () => header?.classList.toggle('is-scrolled', scrollY > 20 || document.body.classList.contains('project-page'));
+addEventListener('scroll', setHeader, {passive:true}); setHeader();
+menu?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.classList.toggle('active',open);menu.setAttribute('aria-expanded',open);document.body.classList.toggle('menu-open',open)});
+nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu?.classList.remove('active');document.body.classList.remove('menu-open')}));
 
-// Включаем деликатное появление смысловых блоков только при наличии JavaScript.
-document.documentElement.classList.add('js-enabled');
-const revealElements = document.querySelectorAll(
-  '.section-heading, .service-card, .project-card, .about__visual, .about__content, blockquote, .advantage-card, .about-project, .company-story__layout, .guarantee__layout, .price-list li, .process-list li, .contact-form'
-);
-revealElements.forEach((element) => element.classList.add('reveal'));
-
-if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
-  revealElements.forEach((element) => revealObserver.observe(element));
-} else {
-  revealElements.forEach((element) => element.classList.add('is-visible'));
+const grid = document.querySelector('#projects-grid');
+if(grid){
+  const classFilter=document.querySelector('#class-filter'), district=document.querySelector('#district-filter'), price=document.querySelector('#price-filter'), priceValue=document.querySelector('#price-value'), sort=document.querySelector('#sort'), count=document.querySelector('#result-count'), empty=document.querySelector('#empty');
+  let status='Все проекты';
+  [...new Set(PROJECTS.map(p=>p.district))].sort().forEach(value=>district.add(new Option(value,value)));
+  const card=p=>`<article class="property-card" data-project="${p.id}"><a href="project.html?id=${p.id}" aria-label="Подробнее о проекте ${p.name}"><div class="property-card__image"><img src="${p.image}" alt="Жилой комплекс ${p.name}" loading="lazy"><span class="badge">${p.status}</span></div><div class="property-card__body"><div class="property-card__meta"><span>${p.className}-класс</span><span>Сдача ${p.deadline.split('-').reverse().join('.')}</span></div><h3>${p.name}</h3><p class="property-card__address">${p.district} · ${p.address}</p><div class="property-card__bottom"><div><small>Квартиры от</small><strong>${money(p.price)}</strong></div><span class="detail-link">Подробнее →</span></div></div></a></article>`;
+  function render(){let items=PROJECTS.filter(p=>(status==='Все проекты'||p.status===status)&&(!classFilter.value||p.className===classFilter.value)&&(!district.value||p.district===district.value)&&p.price<=+price.value);items.sort((a,b)=>sort.value==='cheap'?a.price-b.price:sort.value==='expensive'?b.price-a.price:sort.value==='deadline'?a.deadline.localeCompare(b.deadline):a.name.localeCompare(b.name,'ru'));grid.innerHTML=items.map(card).join('');count.textContent=`${items.length} ${items.length===1?'проект':'проектов'}`;empty.hidden=items.length>0;priceValue.textContent=`${Math.round(price.value/1000000)} млн ₽`}
+  document.querySelectorAll('[data-status]').forEach(btn=>btn.addEventListener('click',()=>{status=btn.dataset.status;document.querySelectorAll('[data-status]').forEach(x=>x.classList.toggle('active',x===btn));render()}));[classFilter,district,price,sort].forEach(x=>x.addEventListener('input',render));document.querySelector('#reset').addEventListener('click',()=>{status='Все проекты';classFilter.value='';district.value='';price.value=80000000;sort.value='cheap';document.querySelectorAll('[data-status]').forEach((x,i)=>x.classList.toggle('active',i===0));render()});render();
 }
-
-// После начала прокрутки усиливаем фон и тень закреплённой шапки.
-const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
-window.addEventListener('scroll', updateHeader, { passive: true });
-updateHeader();
-
-// Открываем и закрываем мобильное меню, одновременно обновляя ARIA-атрибут.
-menuButton?.addEventListener('click', () => {
-  const isOpen = navigation.classList.toggle('is-open');
-  menuButton.classList.toggle('is-active', isOpen);
-  menuButton.setAttribute('aria-expanded', String(isOpen));
-  menuButton.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
-  document.body.classList.toggle('menu-open', isOpen);
-});
-
-// После выбора раздела закрываем мобильное меню, чтобы показать содержимое страницы.
-navigationLinks.forEach((link) => {
-  link.addEventListener('click', () => {
-    navigation.classList.remove('is-open');
-    menuButton.classList.remove('is-active');
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-label', 'Открыть меню');
-    document.body.classList.remove('menu-open');
-  });
-});
-
-// Escape закрывает полноэкранное меню и возвращает фокус на кнопку.
-document.addEventListener('keydown', (event) => {
-  if (event.key !== 'Escape' || !navigation?.classList.contains('is-open')) return;
-  navigation.classList.remove('is-open');
-  menuButton.classList.remove('is-active');
-  menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-label', 'Открыть меню');
-  document.body.classList.remove('menu-open');
-  menuButton.focus();
-});
-
-// Браузер сам выполняет плавный переход по якорю благодаря scroll-behavior в CSS.
-// Здесь дополнительно переводим фокус на первое поле формы для удобства клавиатуры.
-document.querySelectorAll('.js-calc-button').forEach((button) => {
-  button.addEventListener('click', () => {
-    if (contactForm) window.setTimeout(() => contactForm.elements.name.focus({ preventScroll: true }), 650);
-  });
-});
-
-// Имитируем успешную отправку без сервера: очищаем поля и показываем заданный текст.
-contactForm?.addEventListener('submit', (event) => {
-  event.preventDefault();
-  successMessage.classList.add('is-visible');
-  contactForm.reset();
-});
-
-// Фильтрация портфолио без перезагрузки страницы.
-const filterButtons = document.querySelectorAll('.portfolio-filters button');
-const portfolioCards = document.querySelectorAll('.portfolio-card');
-const filterStatus = document.querySelector('.filter-status');
-if (filterButtons.length) {
-  filterButtons[0].classList.add('is-active');
-  filterButtons[0].setAttribute('aria-pressed', 'true');
-  filterButtons.forEach((button) => button.addEventListener('click', () => {
-    const filter = button.dataset.filter;
-    let visible = 0;
-    filterButtons.forEach((item) => {
-      item.classList.toggle('is-active', item === button);
-      item.setAttribute('aria-pressed', String(item === button));
-    });
-    portfolioCards.forEach((card) => {
-      const show = filter === 'Все' || card.dataset.category === filter;
-      card.hidden = !show;
-      if (show) visible += 1;
-    });
-    if (filterStatus) filterStatus.textContent = `Показано проектов: ${visible}`;
-  }));
-}
-
-// Доступная модальная галерея с клавиатурной навигацией.
-const galleryButtons = [...document.querySelectorAll('.gallery__item')];
-const lightbox = document.querySelector('.lightbox');
-if (lightbox && galleryButtons.length) {
-  const lightboxImage = lightbox.querySelector('img');
-  const counter = lightbox.querySelector('.lightbox__counter');
-  let currentImage = 0;
-  let returnFocus;
-  const showImage = (index) => {
-    currentImage = (index + galleryButtons.length) % galleryButtons.length;
-    const source = galleryButtons[currentImage];
-    lightboxImage.src = source.dataset.full;
-    lightboxImage.alt = source.querySelector('img').alt;
-    counter.textContent = `${currentImage + 1} / ${galleryButtons.length}`;
-  };
-  const openLightbox = (index, trigger) => {
-    returnFocus = trigger;
-    showImage(index);
-    lightbox.classList.add('is-open');
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('menu-open');
-    lightbox.querySelector('.lightbox__close').focus();
-  };
-  const closeLightbox = () => {
-    lightbox.classList.remove('is-open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    lightboxImage.src = '';
-    document.body.classList.remove('menu-open');
-    returnFocus?.focus();
-  };
-  galleryButtons.forEach((button, index) => button.addEventListener('click', () => openLightbox(index, button)));
-  lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
-  lightbox.querySelector('.lightbox__prev').addEventListener('click', () => showImage(currentImage - 1));
-  lightbox.querySelector('.lightbox__next').addEventListener('click', () => showImage(currentImage + 1));
-  lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', (event) => {
-    if (!lightbox.classList.contains('is-open')) return;
-    if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft') showImage(currentImage - 1);
-    if (event.key === 'ArrowRight') showImage(currentImage + 1);
-  });
-}
+const calc=()=>{const p=+document.querySelector('#calc-price')?.value||0,d=+document.querySelector('#calc-down')?.value||0,y=+document.querySelector('#calc-years')?.value||1,r=.06/12,n=y*12,pay=(p-d)*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);const el=document.querySelector('#monthly');if(el)el.textContent=`≈ ${money(Math.max(0,Math.round(pay/1000)*1000))}`};document.querySelectorAll('#calc-price,#calc-down,#calc-years').forEach(x=>x.addEventListener('input',calc));calc();
+document.querySelectorAll('form').forEach(form=>form.addEventListener('submit',e=>{e.preventDefault();form.querySelector('.form-success')?.classList.add('is-visible');form.reset()}));
+const detail=document.querySelector('#project-detail');
+if(detail){const p=PROJECTS.find(x=>x.id===new URLSearchParams(location.search).get('id'));if(!p){detail.innerHTML='<section class="project-hero container"><h1>Проект не найден</h1><a href="index.html#projects">Вернуться в каталог</a></section>'}else{document.title=`${p.name} — Атлас`;const gallery=[p.image,PROJECTS[(PROJECTS.indexOf(p)+1)%15].image,PROJECTS[(PROJECTS.indexOf(p)+2)%15].image];detail.innerHTML=`<section class="project-hero"><div class="container"><div class="project-hero__head"><div><p class="eyebrow">${p.status} · ${p.className}-класс</p><h1>${p.name}</h1><p>${p.address}</p></div><div class="project-hero__price">от ${money(p.price)}</div></div><div class="gallery">${gallery.map((src,i)=>`<img src="${src}" alt="${p.name}, фото ${i+1}">`).join('')}</div></div></section><section class="project-content"><div class="container project-layout"><div><h2>О проекте</h2><p class="lead">${p.description}</p><h2>Преимущества</h2><ul class="advantages-list">${p.advantages.map(x=>`<li>✓ ${x}</li>`).join('')}</ul><div class="info-table"><div><span>Адрес</span><b>${p.address}</b></div><div><span>Класс жилья</span><b>${p.className}</b></div><div><span>Срок сдачи</span><b>${p.deadline.split('-').reverse().join('.')}</b></div><div><span>Статус</span><b>${p.status}</b></div></div><h2>Варианты квартир и цены</h2><ul class="apartments">${p.apartments.map(x=>`<li>${x}</li>`).join('')}</ul><h2>Инфраструктура</h2><p class="lead">${p.infra}</p></div><aside class="viewing"><p class="eyebrow">Персональная встреча</p><h3>Записаться на просмотр</h3><p>Покажем проект и подберём планировку.</p><form><input required placeholder="Ваше имя"><input required type="tel" placeholder="Телефон"><button class="button">Оставить заявку</button><a class="button button--ghost" href="tel:+74951234567">Позвонить</a><p class="form-success">Спасибо! Мы свяжемся с вами.</p></form></aside></div></section>`}}
