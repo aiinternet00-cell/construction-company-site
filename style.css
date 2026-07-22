@@ -1,5 +1,5 @@
 /* Базовые переменные позволяют быстро менять цвета и единообразно оформлять сайт. */
-:root { --yellow:#f4b41a; --yellow-dark:#dc9b00; --ink:#151817; --muted:#69706d; --light:#f2f3f1; --white:#fff; --line:#dfe2df; --container:1180px; }
+:root { --yellow:#d4af37; --yellow-dark:#b58a16; --navy:#071b33; --ink:#151817; --muted:#69706d; --light:#f2f3f1; --white:#fff; --line:#dfe2df; --container:1180px; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; scroll-padding-top:82px; }
 body { margin:0; color:var(--ink); background:var(--white); font-family:"Manrope",Arial,sans-serif; line-height:1.6; }
@@ -11,9 +11,10 @@ a { color:inherit; text-decoration:none; }
 /* Шапка и навигация. */
 .header { position:absolute; z-index:20; top:0; width:100%; border-bottom:1px solid rgba(255,255,255,.17); color:#fff; }
 .header__inner { height:82px; display:flex; align-items:center; gap:40px; }
-.logo { display:flex; align-items:center; gap:11px; font-size:20px; font-weight:800; letter-spacing:-.6px; white-space:nowrap; }
-.logo>span:last-child>span { color:var(--yellow); }
-.logo__mark { width:37px; height:37px; display:grid; place-items:center; color:var(--ink); background:var(--yellow); font-size:12px; letter-spacing:-1px; clip-path:polygon(50% 0,100% 25%,100% 100%,0 100%,0 25%); }
+.logo { display:inline-flex; align-items:center; }
+.logo__mark { width:48px; height:48px; overflow:visible; filter:drop-shadow(0 5px 12px rgba(0,0,0,.2)); }
+.logo__frame { fill:var(--navy); stroke:var(--yellow); stroke-width:2; }
+.logo__letter { fill:var(--yellow); }
 .nav { display:flex; align-items:center; gap:31px; margin:auto; font-size:13px; font-weight:600; }
 .nav a { transition:color .2s; }
 .nav a:hover { color:var(--yellow); }
