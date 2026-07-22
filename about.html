@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Atlas Construction — международная команда и комплексный подход к строительству.">
+  <meta name="description" content="Atlas Construction — международная команда, реализованные объекты, гарантии и цены на строительство.">
   <title>О компании — Atlas Construction</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,25 +19,35 @@
       </a>
       <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
       <nav class="nav" aria-label="Основная навигация">
-        <a href="index.html#home">Главная</a><a href="index.html#projects">Проекты</a><a href="index.html#services">Услуги</a><a href="#advantages" aria-current="page">О компании</a><a href="index.html#contacts">Контакты</a>
+        <a href="#company">О компании</a><a href="#advantages">Преимущества</a><a href="#projects">Объекты</a><a href="#prices">Цены</a><a href="#consultation">Контакты</a>
       </nav>
       <a class="header__phone" href="tel:+74951234567"><small>Связаться с нами</small>+7 (495) 123-45-67</a>
     </div>
   </header>
 
   <main>
-    <section class="about-hero">
-      <div class="container about-hero__content"><p class="eyebrow">Atlas Construction</p><h1>Создаём пространства<br><em>для будущего</em></h1><p>Объединяем международную экспертизу, современную архитектуру и безупречное качество реализации.</p></div>
+    <!-- Первый экран. -->
+    <section class="about-hero" id="top">
+      <div class="container about-hero__content"><p class="eyebrow">Atlas Construction</p><h1>Создаём пространства<br><em>для будущего</em></h1><p>Объединяем международную экспертизу, современную архитектуру и безупречное качество реализации.</p><a class="button" href="#consultation">Обсудить проект <span aria-hidden="true">↘</span></a></div>
     </section>
 
-    <section class="section advantages" id="advantages">
+    <!-- О компании. -->
+    <section class="section company-story" id="company">
+      <div class="container company-story__layout">
+        <div><p class="eyebrow eyebrow--dark">О компании</p><h2>Строим без компромиссов в качестве</h2></div>
+        <div><p>Atlas Construction — строительная компания полного цикла. Мы проектируем, строим и реконструируем жилые и коммерческие объекты, создавая функциональные пространства с выразительной архитектурой.</p><p>Международный опыт команды помогает нам соединять точные инженерные решения, актуальный дизайн и ответственный контроль каждого этапа.</p><div class="company-facts"><span><strong>12+</strong> лет опыта</span><span><strong>247</strong> объектов сдано</span><span><strong>10 лет</strong> гарантии</span></div></div>
+      </div>
+    </section>
+
+    <!-- Семь обязательных преимуществ. -->
+    <section class="section section--gray advantages" id="advantages">
       <div class="container">
         <div class="section-heading"><div><p class="eyebrow eyebrow--dark">Наши преимущества</p><h2>Почему выбирают нас</h2></div><p>Работаем прозрачно, берём ответственность за результат и сопровождаем проект на каждом этапе.</p></div>
         <div class="advantages-grid">
-          <article class="advantage-card"><span>01</span><div class="advantage-card__icon">◎</div><h3>Международная команда</h3><p>В нашей команде работают опытные инженеры, архитекторы и проектировщики из Европы, ОАЭ, Турции и других стран.</p></article>
+          <article class="advantage-card"><span>01</span><div class="advantage-card__icon">◎</div><h3>Лучшие специалисты из-за границы</h3><p>В нашей команде работают опытные инженеры, архитекторы и проектировщики из Европы, ОАЭ, Турции и других стран.</p></article>
           <article class="advantage-card"><span>02</span><div class="advantage-card__icon">⌘</div><h3>Комплексный подход</h3><p>Берём на себя все этапы: от проектирования до полной сдачи объекта под ключ.</p></article>
           <article class="advantage-card"><span>03</span><div class="advantage-card__icon">◇</div><h3>Индивидуальный дизайн</h3><p>Создаём уникальные архитектурные и интерьерные решения под задачи клиента.</p></article>
-          <article class="advantage-card"><span>04</span><div class="advantage-card__icon">✦</div><h3>Современные технологии</h3><p>Используем инновационные строительные решения, оборудование и материалы.</p></article>
+          <article class="advantage-card"><span>04</span><div class="advantage-card__icon">✦</div><h3>Современные технологии</h3><p>Используем инновационные строительные решения, оборудование и качественные материалы.</p></article>
           <article class="advantage-card"><span>05</span><div class="advantage-card__icon">₽</div><h3>Финансовая прозрачность</h3><p>Фиксируем стоимость в договоре и не добавляем скрытые платежи.</p></article>
           <article class="advantage-card"><span>06</span><div class="advantage-card__icon">⌾</div><h3>Высокий уровень безопасности</h3><p>Соблюдаем строительные нормы, стандарты качества и требования безопасности.</p></article>
           <article class="advantage-card"><span>07</span><div class="advantage-card__icon">10</div><h3>Расширенная гарантия</h3><p>Предоставляем гарантию до 10 лет на выполненные работы и используемые материалы.</p></article>
@@ -45,17 +55,53 @@
       </div>
     </section>
 
-    <section class="section process" id="process">
-      <div class="container"><p class="eyebrow">Путь к результату</p><h2>Как мы работаем</h2>
-        <ol class="process-list">
-          <li><span>01</span><strong>Заявка</strong></li><li><span>02</span><strong>Бесплатная консультация</strong></li><li><span>03</span><strong>Подготовка сметы</strong></li><li><span>04</span><strong>Подписание договора</strong></li><li><span>05</span><strong>Выполнение работ</strong></li><li><span>06</span><strong>Контроль качества</strong></li><li><span>07</span><strong>Сдача объекта</strong></li>
-        </ol>
+    <!-- Три реализованных объекта и три фотографии. -->
+    <section class="section about-projects" id="projects">
+      <div class="container"><div class="section-heading"><div><p class="eyebrow eyebrow--dark">Портфолио</p><h2>Наши реализованные объекты</h2></div><p>От частных резиденций до деловых пространств — каждый проект отражает задачи и характер клиента.</p></div>
+        <div class="about-projects__grid">
+          <article class="about-project"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Современный загородный дом Сосновый бор"><div><span>Строительство · 2025</span><h3>Дом «Сосновый бор»</h3><p>Загородная резиденция, 320 м²</p></div></article>
+          <article class="about-project"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Современный офис Atlas Plaza"><div><span>Ремонт · 2025</span><h3>Офис «Atlas Plaza»</h3><p>Деловое пространство, 680 м²</p></div></article>
+          <article class="about-project"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Лаконичный фасад частного дома Гармония"><div><span>Реконструкция · 2024</span><h3>Дом «Гармония»</h3><p>Частный дом, 240 м²</p></div></article>
+        </div>
       </div>
     </section>
 
-    <section class="about-cta"><div class="container"><p class="eyebrow">Начнём сотрудничество</p><h2>Готовы реализовать ваш проект?</h2><p>Свяжитесь с нами и получите бесплатную консультацию</p><a class="button" href="index.html#contacts">Получить консультацию <span aria-hidden="true">↗</span></a></div></section>
+    <!-- Три отзыва клиентов. -->
+    <section class="section reviews about-reviews" id="reviews">
+      <div class="container"><p class="eyebrow">Отзывы наших клиентов</p><h2>Доверие, подтверждённое результатом</h2><div class="reviews-grid">
+        <blockquote><div class="stars" aria-label="5 из 5">★★★★★</div><p>«Atlas Construction построили наш дом точно в срок. Всегда были на связи, подробно объясняли каждый этап. Результат превзошёл ожидания!»</p><footer><strong>Алексей и Мария</strong><span>Дом «Сосновый бор»</span></footer></blockquote>
+        <blockquote><div class="stars" aria-label="5 из 5">★★★★★</div><p>«Команда полностью преобразила офис, не остановив нашу работу. Особенно впечатлили точность сметы и уровень организации.»</p><footer><strong>Елена Соколова</strong><span>Офис «Atlas Plaza»</span></footer></blockquote>
+        <blockquote><div class="stars" aria-label="5 из 5">★★★★★</div><p>«Ценим внимание к деталям и честные рекомендации. Реконструкция получилась современной, а характер дома удалось сохранить.»</p><footer><strong>Дмитрий Волков</strong><span>Дом «Гармония»</span></footer></blockquote>
+      </div></div>
+    </section>
+
+    <!-- Гарантия с фирменным знаком. -->
+    <section class="section guarantee" id="guarantee"><div class="container guarantee__layout">
+      <div class="guarantee__logo" aria-label="Логотип Atlas Construction"><svg class="logo__mark" viewBox="0 0 52 52" aria-hidden="true"><path class="logo__frame" d="M26 3 48 15.5V49H4V15.5L26 3Z"/><path class="logo__letter" d="M14 40 25.8 13 38 40h-7.2l-1.7-4.5h-6.5L25 29h1.8l-1.3-4-6 15H14Z"/></svg><span>Atlas Construction</span></div>
+      <div><p class="eyebrow eyebrow--dark">Гарантия Atlas Construction</p><h2>До 10 лет уверенности в результате</h2><p>Гарантийные обязательства фиксируются в договоре и распространяются на выполненные работы и используемые материалы. Мы остаёмся на связи после сдачи объекта и оперативно решаем гарантийные вопросы.</p></div>
+    </div></section>
+
+    <!-- Семь базовых услуг с ценами. -->
+    <section class="section prices" id="prices"><div class="container"><div class="section-heading"><div><p class="eyebrow">Ориентиры бюджета</p><h2>Цены на базовые услуги</h2></div><p>Предварительная стоимость помогает оценить бюджет до детального расчёта.</p></div>
+      <ul class="price-list">
+        <li><span>Проектирование и дизайн</span><strong>от 3 000 ₽/м²</strong></li>
+        <li><span>Ремонт квартир под ключ</span><strong>от 18 000 ₽/м²</strong></li>
+        <li><span>Ремонт офисных помещений</span><strong>от 20 000 ₽/м²</strong></li>
+        <li><span>Строительство частного дома</span><strong>от 45 000 ₽/м²</strong></li>
+        <li><span>Реконструкция здания</span><strong>от 30 000 ₽/м²</strong></li>
+        <li><span>Инженерные системы под ключ</span><strong>от 15 000 ₽/м²</strong></li>
+        <li><span>Ландшафтный дизайн</span><strong>от 5 000 ₽/м²</strong></li>
+      </ul>
+      <p class="prices__note">Точная стоимость рассчитывается индивидуально после консультации, подготовки проекта и осмотра объекта.</p>
+    </div></section>
+
+    <section class="section process" id="process"><div class="container"><p class="eyebrow">Путь к результату</p><h2>Как мы работаем</h2><ol class="process-list">
+      <li><span>01</span><strong>Заявка</strong></li><li><span>02</span><strong>Бесплатная консультация</strong></li><li><span>03</span><strong>Подготовка сметы</strong></li><li><span>04</span><strong>Подписание договора</strong></li><li><span>05</span><strong>Выполнение работ</strong></li><li><span>06</span><strong>Контроль качества</strong></li><li><span>07</span><strong>Сдача объекта</strong></li>
+    </ol></div></section>
+
+    <section class="about-cta" id="consultation"><div class="container"><p class="eyebrow">Начнём сотрудничество</p><h2>Готовы реализовать ваш проект?</h2><p>Свяжитесь с нами и получите бесплатную консультацию</p><a class="button" href="index.html#contacts">Получить консультацию <span aria-hidden="true">↗</span></a></div></section>
   </main>
-  <footer class="footer"><div class="container"><a class="logo" href="index.html#home" aria-label="Atlas Construction — на главную"><svg class="logo__mark" viewBox="0 0 52 52" aria-hidden="true"><path class="logo__frame" d="M26 3 48 15.5V49H4V15.5L26 3Z"/><path class="logo__letter" d="M14 40 25.8 13 38 40h-7.2l-1.7-4.5h-6.5L25 29h1.8l-1.3-4-6 15H14Z"/></svg></a><p>© 2026 Atlas Construction. Строим честно и надолго.</p><a href="#">Наверх ↑</a></div></footer>
+  <footer class="footer"><div class="container"><a class="logo" href="index.html#home" aria-label="Atlas Construction — на главную"><svg class="logo__mark" viewBox="0 0 52 52" aria-hidden="true"><path class="logo__frame" d="M26 3 48 15.5V49H4V15.5L26 3Z"/><path class="logo__letter" d="M14 40 25.8 13 38 40h-7.2l-1.7-4.5h-6.5L25 29h1.8l-1.3-4-6 15H14Z"/></svg></a><p>© 2026 Atlas Construction. Строим честно и надолго.</p><a href="#top">Наверх ↑</a></div></footer>
   <script src="script.js"></script>
 </body>
 </html>
