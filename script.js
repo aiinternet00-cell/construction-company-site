@@ -76,3 +76,69 @@ contactForm?.addEventListener('submit', (event) => {
   successMessage.classList.add('is-visible');
   contactForm.reset();
 });
+
+// Фильтрация портфолио без перезагрузки страницы.
+const filterButtons = document.querySelectorAll('.portfolio-filters button');
+const portfolioCards = document.querySelectorAll('.portfolio-card');
+const filterStatus = document.querySelector('.filter-status');
+if (filterButtons.length) {
+  filterButtons[0].classList.add('is-active');
+  filterButtons[0].setAttribute('aria-pressed', 'true');
+  filterButtons.forEach((button) => button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
+    let visible = 0;
+    filterButtons.forEach((item) => {
+      item.classList.toggle('is-active', item === button);
+      item.setAttribute('aria-pressed', String(item === button));
+    });
+    portfolioCards.forEach((card) => {
+      const show = filter === 'Все' || card.dataset.category === filter;
+      card.hidden = !show;
+      if (show) visible += 1;
+    });
+    if (filterStatus) filterStatus.textContent = `Показано проектов: ${visible}`;
+  }));
+}
+
+// Доступная модальная галерея с клавиатурной навигацией.
+const galleryButtons = [...document.querySelectorAll('.gallery__item')];
+const lightbox = document.querySelector('.lightbox');
+if (lightbox && galleryButtons.length) {
+  const lightboxImage = lightbox.querySelector('img');
+  const counter = lightbox.querySelector('.lightbox__counter');
+  let currentImage = 0;
+  let returnFocus;
+  const showImage = (index) => {
+    currentImage = (index + galleryButtons.length) % galleryButtons.length;
+    const source = galleryButtons[currentImage];
+    lightboxImage.src = source.dataset.full;
+    lightboxImage.alt = source.querySelector('img').alt;
+    counter.textContent = `${currentImage + 1} / ${galleryButtons.length}`;
+  };
+  const openLightbox = (index, trigger) => {
+    returnFocus = trigger;
+    showImage(index);
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('menu-open');
+    lightbox.querySelector('.lightbox__close').focus();
+  };
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImage.src = '';
+    document.body.classList.remove('menu-open');
+    returnFocus?.focus();
+  };
+  galleryButtons.forEach((button, index) => button.addEventListener('click', () => openLightbox(index, button)));
+  lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
+  lightbox.querySelector('.lightbox__prev').addEventListener('click', () => showImage(currentImage - 1));
+  lightbox.querySelector('.lightbox__next').addEventListener('click', () => showImage(currentImage + 1));
+  lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') showImage(currentImage - 1);
+    if (event.key === 'ArrowRight') showImage(currentImage + 1);
+  });
+}
