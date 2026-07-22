@@ -1,7 +1,7 @@
 /* Базовые переменные позволяют быстро менять цвета и единообразно оформлять сайт. */
 :root { --yellow:#d4af37; --yellow-dark:#b58a16; --navy:#071b33; --ink:#151817; --muted:#69706d; --light:#f2f3f1; --white:#fff; --line:#dfe2df; --container:1180px; }
 * { box-sizing:border-box; }
-html { scroll-behavior:smooth; scroll-padding-top:82px; }
+html { scroll-behavior:smooth; scroll-padding-top:104px; }
 body { margin:0; color:var(--ink); background:var(--white); font-family:"Manrope",Arial,sans-serif; line-height:1.6; }
 body.menu-open { overflow:hidden; }
 img { display:block; width:100%; }
@@ -9,15 +9,22 @@ a { color:inherit; text-decoration:none; }
 .container { width:min(var(--container), calc(100% - 48px)); margin-inline:auto; }
 
 /* Шапка и навигация. */
-.header { position:absolute; z-index:20; top:0; width:100%; border-bottom:1px solid rgba(255,255,255,.17); color:#fff; }
-.header__inner { height:82px; display:flex; align-items:center; gap:40px; }
+.header { position:fixed; z-index:20; top:0; width:100%; color:#fff; background:linear-gradient(180deg,rgba(12,14,13,.82),rgba(12,14,13,.64)); border-bottom:1px solid rgba(212,175,55,.52); box-shadow:0 12px 36px rgba(0,0,0,.08); backdrop-filter:blur(18px) saturate(125%); -webkit-backdrop-filter:blur(18px) saturate(125%); transition:background .35s,box-shadow .35s; }
+.header.is-scrolled { background:rgba(12,14,13,.93); box-shadow:0 14px 40px rgba(0,0,0,.24); }
+.header__inner { height:104px; display:flex; align-items:center; gap:34px; }
 .logo { display:inline-flex; align-items:center; }
-.logo__mark { width:48px; height:48px; overflow:visible; filter:drop-shadow(0 5px 12px rgba(0,0,0,.2)); }
+.header .logo { flex:none; gap:15px; }
+.logo__mark { width:52px; height:52px; overflow:visible; filter:drop-shadow(0 5px 12px rgba(0,0,0,.2)); }
 .logo__frame { fill:var(--navy); stroke:var(--yellow); stroke-width:2; }
 .logo__letter { fill:var(--yellow); }
-.nav { display:flex; align-items:center; gap:31px; margin:auto; font-size:13px; font-weight:600; }
-.nav a { transition:color .2s; }
-.nav a:hover { color:var(--yellow); }
+.logo__copy { display:flex; flex-direction:column; line-height:1; }
+.logo__copy strong { color:#fff; font-size:16px; font-weight:700; letter-spacing:.3px; white-space:nowrap; }
+.logo__copy>span { margin-top:8px; color:#d4af37; font-size:8px; font-weight:600; letter-spacing:1.25px; text-transform:uppercase; white-space:nowrap; }
+.nav { display:flex; align-items:center; gap:27px; margin:auto; font-size:12px; font-weight:600; letter-spacing:.15px; }
+.nav a { position:relative; padding:10px 0; transition:color .3s,transform .3s; }
+.nav a::after { content:""; position:absolute; left:0; right:0; bottom:3px; height:1px; background:var(--yellow); transform:scaleX(0); transform-origin:right; transition:transform .35s ease; }
+.nav a:hover,.nav a:focus-visible { color:#f2cf65; transform:translateY(-1px); }
+.nav a:hover::after,.nav a:focus-visible::after { transform:scaleX(1); transform-origin:left; }
 .header__phone { text-align:right; font-size:14px; font-weight:700; }
 .header__phone small { display:block; color:#adb2ae; font-size:9px; text-transform:uppercase; letter-spacing:1.4px; }
 .menu-toggle { display:none; border:0; padding:8px; background:transparent; }
@@ -124,6 +131,8 @@ blockquote footer span { color:#838986; font-size:10px; }
 /* Планшетная версия: уменьшаем промежутки и переводим услуги в две колонки. */
 @media (max-width:960px) {
   .header__phone { display:none; }
+  .header__inner { gap:25px; }
+  .nav { margin-left:auto; margin-right:0; gap:20px; }
   .services-grid { grid-template-columns:repeat(2,1fr); }
   .about__layout { gap:45px; }
   .about__visual img { height:520px; }
@@ -133,12 +142,17 @@ blockquote footer span { color:#838986; font-size:10px; }
 /* Мобильная версия: меню раскрывается кнопкой, контент становится одноколоночным. */
 @media (max-width:720px) {
   .container { width:min(100% - 32px,var(--container)); }
-  .header__inner { height:68px; justify-content:space-between; }
+  html { scroll-padding-top:82px; }
+  .header__inner { height:82px; justify-content:space-between; }
+  .header .logo { gap:11px; }
+  .logo__mark { width:43px; height:43px; }
+  .logo__copy strong { font-size:13px; }
+  .logo__copy>span { margin-top:6px; font-size:6.5px; letter-spacing:.85px; }
   .menu-toggle { display:block; position:relative; z-index:2; }
   .menu-toggle.is-active span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
   .menu-toggle.is-active span:nth-child(2) { opacity:0; }
   .menu-toggle.is-active span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-  .nav { position:fixed; inset:0; display:flex; flex-direction:column; justify-content:center; gap:28px; margin:0; background:#171a19; font-size:20px; transform:translateX(100%); transition:transform .3s; }
+  .nav { position:fixed; inset:0; display:flex; flex-direction:column; justify-content:center; gap:28px; margin:0; background:rgba(17,19,18,.98); font-size:20px; transform:translateX(100%); transition:transform .3s; }
   .nav.is-open { transform:none; }
   .hero { min-height:720px; background-position:62% center; }
   .hero::before,.hero__badge { display:none; }

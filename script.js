@@ -4,6 +4,12 @@ const navigation = document.querySelector('.nav');
 const navigationLinks = document.querySelectorAll('.nav a');
 const contactForm = document.querySelector('#contact-form');
 const successMessage = document.querySelector('.form-success');
+const header = document.querySelector('.header');
+
+// После начала прокрутки усиливаем фон и тень закреплённой шапки.
+const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 24);
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
 
 // Открываем и закрываем мобильное меню, одновременно обновляя ARIA-атрибут.
 menuButton.addEventListener('click', () => {
